@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .message {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 400px;
+            height: 100%;
+            padding: 20px;
+            margin: 200px auto;
+            box-shadow: 0 0 10px rgb(98, 100, 100);
+            border-radius: 5px;
+        }
+
+        .message--icon {
+            color: rgb(24, 197, 139);
+            font-size: 4rem;
+        }
+
+        .message__heading {
+            
+        }
+
+        .message__content {
+            font-weight: 600;
+            background-color:rgb(227, 249, 241);
+            color: rgb(0, 87, 50);
+        }
+        .message__btn {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .message__btn-login {
+            height: 35px;
+            padding: 0 15px;
+           border-radius: 20px;
+           background-color: rgb(173, 111, 231);
+           border: none;
+           color: #fff;
+        }
+        .message__btn-login:hover{
+            cursor: pointer;
+            background-color: rgb(198, 164, 231);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="message">
+        <i class="fa-regular fa-circle-check message--icon"></i>
+        <h2 class="message__heading">Registration Success</h2>
+        <div class="message__content">
+            <i class="fa-regular fa-circle-check"></i>
+            Cảm ơn bạn đã đăng kí tài khoản của chúng tôi . bây giờ bạn có thể đăng nhập và sử dụng tài khoản của mình
+        </div>
+        <div class="message__btn">
+            <button class="message__btn-login" id="btn--login">Đăng nhập</button>
+            <button class="message__btn-login" id="btn--signup">Đăng kí</button>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("btn--signup").addEventListener("click", function(e){
+        window.location.href = "http://localhost/projectMini/view/signup.php";
+    })
+    document.getElementById("btn--login").addEventListener("click", function(e){
+        window.location.href = "http://localhost/projectMini/view/login.php";
+    })
+</script>
+</html>

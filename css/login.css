@@ -1,0 +1,139 @@
+
+
+.form_main {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    padding: 30px 30px 60px 30px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px #090121;
+    margin: 50px auto;
+    z-index: 1;
+  }
+  
+  .heading {
+    font-size: 2.5em;
+    color: #2e2e2e;
+    font-weight: 700;
+    margin: 15px 0 30px 0;
+  }
+  
+  .form__group {
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .form_input {
+    width: 100%;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid rgb(173, 173, 173);
+    border-radius: 30px;
+    margin: 10px 0;
+    color: black;
+    font-size: .8em;
+    font-weight: 500;
+    box-sizing: border-box;
+    padding-left: 30px;
+  }
+  
+  .form_input:focus {
+    outline: none;
+    border-bottom: 2px solid rgb(199, 114, 255);
+  }
+  .form-message {
+    display: block;
+    margin: 5px 10%;
+    color: red;
+}
+.message_err{
+  color: red;
+}
+.form__group.invalid .form_input {
+  border-bottom: 2px solid rgb(255, 0, 0);
+}
+
+  
+  .form_input::placeholder {
+    color: rgb(168, 168, 168);
+    font-size: 1.1em;
+    font-weight: 500;
+  }
+  
+  #button {
+    position: relative;
+    width: 100%;
+    border: 2px solid #8000ff;
+    background-color: #8000ff;
+    height: 40px;
+    color: white;
+    font-size: .8em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 30px;
+    margin: 10px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  #button::after {
+    content: "";
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.253);
+    height: 100%;
+    width: 150px;
+    top: 0;
+    left: -200px;
+    border-bottom-right-radius: 100px;
+    border-top-left-radius: 100px;
+    filter: blur(10px);
+    transition-duration: .5s;
+  }
+  
+  #button:hover::after {
+    transform: translateX(600px);
+    transition-duration: .5s;
+  }
+  
+  .signupContainer {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .signupContainer a {
+    font-size: 1em;
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+  }
+  .signupContainer a:hover{
+    color: rgb(72, 0, 255);
+  }
+  .wrap__input-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .form__icon{
+    position: absolute;
+    color: #717171;
+    left: 10px;
+  }
+  .form__text{
+    color: #090121;
+  }
+  .form__text a{
+    color: #9d00ff;
+  }
+  

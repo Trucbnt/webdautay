@@ -1,0 +1,416 @@
+
+*{
+    /* chỗ này là set cho tất cả các thẻ có thuộc tinh box-sizing: inherit;
+    dong nay nghia la nó kế thừa thuộc tính box-sizing
+    */
+    box-sizing: inherit;
+    /* set tất cả các thẻ     
+    margin: 0;
+    padding: 0;
+    vì có 1 số thẻ mặc định nó đã tự có padding or mg rồi : ví dụ với tag Ul li
+     */
+    margin: 0;
+    padding: 0;
+}
+html{
+    box-sizing: border-box;
+    font-size: 62.5%;
+    font-family: 'Roboto', sans-serif;
+}
+/* đây là nhúng font phần này 2 điểm nhé 
+
+*/
+@font-face {
+    /* dong này là đặt name cho font */
+    font-family: "test" ;
+    /* địa chỉ font muốn nhúng  */
+    src: url(../UTM\ Duepuntozero.ttf);
+}
+@font-face {
+    font-family: "test" ;
+    src: url(../UTM\ DuepuntozeroBold.ttf);
+    font-weight: bold;
+}
+
+.app{
+    width: 1400px;
+    margin: 0 auto;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+}
+.navbar__list{
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+.navbar__list>li{
+    border-right:1px solid #fff ;
+    cursor: pointer;
+}
+.navbar__list>li:active .navbar__item{
+    color: aqua;
+}
+.navbar__list>li:first-child .navbar__item{
+    color: aqua;
+}
+.navbar__list>li:last-child{
+    border:none ;
+}
+.navbar__list>li:hover {
+    background-color: #c5b9ab;
+}
+.navbar__item{
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    padding: 0 12px;
+    font-size: 1.4rem;
+}
+.form{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+.form__input{
+    width: 250px ; 
+    height: 28px;
+    border-radius: 5px;
+    border: none;
+}
+.form__btn{
+    width: 70px ; 
+    height: 28px;
+    background-color: #8c8908;
+    border:1px solid #fff ;
+    border-radius: 5px;
+    color: #fff;
+    margin-left: 10px;
+}
+.form__btn:hover{
+    background-color: #b9b72c;
+    cursor: pointer;
+}
+.header{
+
+
+}
+.banner{
+    width: 100%;
+    height: 260px;
+}
+.content{
+    min-height: 480px;
+}
+.product{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 350px;
+    gap: 10px;
+}
+.product__item{
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid #ccc;
+}
+.product__img{
+    margin-top: 20px;
+    width: 83.333%;
+    height: 60%;
+}
+.product__img:hover{
+    animation: test 0.2s ease-in-out;
+}
+/* đâyy là hiệu ứng 
+    nếu đề yêu cầu quay 1 vòng thì dùng rotate
+*/
+@keyframes test {
+    from{
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    to{
+        opacity: 0.5;
+        transform: scale(1.1);
+    }
+}
+.product__title{
+    font-size: 1.3rem;
+    margin: 12px 0;
+}
+.product__title:active{
+    color: #c5b9ab;
+}
+.product__price{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.product__price--new{
+    font-size: 1.4rem;
+    font-weight: bold;
+    color:#8d171c;
+    margin-right: 5px;
+}
+.product__price--old{
+    text-decoration: line-through;
+    
+}
+.content__heading{
+    margin: 15px 0;
+    font-weight: normal;
+    color: #c29417;
+}
+
+.product--btn{
+    font-size: 1.4rem;
+    font-weight: 500;
+    width: 50%;
+    height: 30px;
+    border: none;
+    background: orangered;
+    color: white;
+    border-radius: 20px;
+}
+.product--btn:hover{
+    background: rgb(255, 145, 105);
+    cursor: pointer;
+}
+.navbar__account{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+.fa-cart-shopping{
+    color: white;
+    font-size: 2rem;
+}
+.navbar__account--login{
+    font-size: 1.4rem;
+    color: #fff;
+    text-decoration: none;
+    margin-left: 40px;
+}
+.navbar__account--login:hover{
+    font-size: 1.4rem;
+    color: aqua;
+    text-decoration: none;
+}
+.navbar__account-user{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+.navbar__account-user--img{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.navbar__account-user--name{
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+.navbar__account--wrap{
+    background-color: #fff;
+    padding: 10px;
+    position: absolute;
+    right: 80px;
+    top: 45px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px #656565;
+    display: none;
+}
+.navbar__account--list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.navbar__account--item{
+    text-decoration: none;
+    font-size: 1.4rem;
+    color: #000;
+    line-height: 35px;
+}
+.navbar__account--item:hover{
+    color: rgb(227, 124, 14);
+}
+.header__cart-heading{
+    text-align: left;
+    margin: 10px;
+    font-size: 1.4rem;
+    color: rgb(200, 200, 200);
+    font-weight: 300;
+}
+
+/* thẻ bọc danh sách sản phẩm */
+.header__cart-list-item{
+    margin: 10px;
+    list-style: none;
+    padding: 0;
+}
+/* sản phẩm thêm vaf0 ( thẻ bọc tất cả thông tin của 1 sản phâm ) */
+.header__cart-item{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+.header__cart-item:hover{
+    background-color: #f4f4f4;
+}
+/* ảnh sản phẩm  */
+.header__cart-item-img{
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border-color);
+}
+/* thẻ bọc sản phẩm */
+.header__cart-item-info{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding-left: 10px;
+}
+/* thẻ div đầu sản phầm */
+.header__cart-item-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/* tên sản phâm */
+.header__cart-item-name{
+    font-size: 1.4rem;
+    margin: 0;
+}
+/* giá tiền sản phẩm */
+.header__cart-item-price{
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+/* dấu nhân */
+.header__cart-item-multiply{
+    color: #999;
+    margin: 0 4px;
+    font-size: 0.8rem;
+}
+/* so luong mua */
+.header__cart-item-quantity{
+    font-size: 1rem;
+    color: #999;
+}
+/* phân thân của cart-item */
+.header__cart-item-body{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/* mô tả sản phâm */
+.header__cart-description{
+    color: #999;
+    font-weight: 500;
+    cursor: text;
+}
+/* chữ xóa */
+.header__cart-delete{
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #656565;
+    cursor: pointer;
+}
+.header__cart-delete:hover{
+    color: orangered;
+}
+
+
+/* nút bấm xem giỏ hàng */
+.header__cart-view-btn.btn.btn--primary{
+    /* cho nút áp sát vào bên phải  */
+    float: right;
+    margin: 0 10px 10px ;
+}
+.header__cart-view-btn.btn.btn--primary:hover{
+    background-color: #ee5e36;
+}
+
+
+.header__cart{
+    width: 150px;
+    position: relative;
+    text-align: center;
+}
+
+.header__cart-wrap{
+    position: relative;
+    display: inline-block; /* không kế thừa chiều ngang nữa */
+    padding: 0 8px;
+    cursor: pointer;
+}
+
+        /*hien thi cart-list  */
+.header__cart-wrap:hover .header__cart-list{
+    display: block;
+    z-index: 1;
+}
+.header__cart-list{
+    position: absolute;
+    top: 40px;
+    width: 420px;
+    right: 140px;
+    border-radius: 2px;
+    background-color:#fff;
+    /* box-shadow cho thêm lớp bóng  */
+    box-shadow: 0 0 10px 2px  rgba(0,0,0, 0.2) ; 
+    cursor: default;
+    /* gán giá trị from to cho animation */
+    --growth-from:0.7;
+    --growth-to:1;
+    animation: growth linear 0.02s;
+    z-index: 1;
+    display: none;
+}
+.header__cart-view-btn.btn.btn--primary{
+    /* cho nút áp sát vào bên phải  */
+    float: right;
+    margin: 0 10px 10px ;
+}
+.header__cart-view-btn.btn.btn--primary:hover{
+    background-color: #ee5e36;
+}
+.btn{
+    min-width: 132px;
+    height: 30px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    font-size: 1.3rem;
+    border-radius: 2px;
+    background-color: #fff;
+    cursor: pointer;
+    color: var(--text-color);
+    display: inline-flex;
+    justify-content: center; /* căn giữa chiều ngang */
+    align-items: center; /* căn giữa dọc */
+    line-height: 1.4rem;
+}
+.btn:hover{
+    background-color: rgba(0, 0, 0,0.05);
+}
+
+
+
+        /* khi co class header__cart-no-cart thi cho nó hiển thị  */
+.header__cart-no-cart .header__cart--no-cart-img,
+.header__cart-no-cart .header__cart--no-cart-content{
+    display: block;
+}
