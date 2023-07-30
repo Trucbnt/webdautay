@@ -12,6 +12,29 @@ try {
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $stmt->execute();
     $products =  $stmt->fetchAll();
+    $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $itemsPerPage = 1; // Số sản phẩm trên mỗi trang
+
+    // Tính toán vị trí bắt đầu của sản phẩm trong cơ sở dữ liệu
+    $startFrom = ($currentPage - 1) * $itemsPerPage;
+
+    // Lấy tổng số sản phẩm
+    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM product");
+    $stmt->execute();
+    $totalItems = $stmt->fetch()['total'];
+
+    // Lấy danh sách sản phẩm theo trang
+    $stmt = $conn->prepare("SELECT * FROM product LIMIT :startFrom, :itemsPerPage");
+    $stmt->bindValue(':startFrom', $startFrom, PDO::PARAM_INT);
+    $stmt->bindValue(':itemsPerPage', $itemsPerPage, PDO::PARAM_INT);
+    $stmt->execute();
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Tính toán số trang
+    $totalPages = ceil($totalItems / $itemsPerPage);
+
+    // Hiển thị danh sách sản phẩm
+
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
@@ -94,6 +117,9 @@ try {
             <?php endforeach; ?>
         </tbody>
     </table>
+   <?php  for ($i = 1; $i <= $totalPages; $i++) {
+        echo "<a href='?page={$i}'>{$i}</a> ";
+    } ?>
     <button class="btnAddproduct btn  btn-primary">Thêm sản phẩm</button>
     <form action="../model/upload.php" method="POST" class="formUpload toast " enctype="multipart/form-data" id="formadd">
         <div class="toast-header mb-3">
