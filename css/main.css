@@ -389,7 +389,7 @@ html{
     background-color: #ee5e36;
 }
 .btn{
-    min-width: 132px;
+    max-width: 132px;
     height: 30px;
     text-decoration: none;
     border: 1px solid #ccc;

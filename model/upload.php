@@ -74,8 +74,9 @@ if ($uploadOk == 0) {
                     $stmt->bindParam(":priceOld", $priceOld);
                     $stmt->bindParam(":descript", $descript);
                     $stmt->execute();
+                    header("Location: ../admin/admin.php");
+                    exit();
                 }
-                echo "successfully executed";
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();
             }

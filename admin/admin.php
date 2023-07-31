@@ -7,13 +7,9 @@ if (isset($_GET['error'])) {
 try {
     $conn = new PDO("mysql:host=localhost;dbname=mydatabase", "root", "");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $query = "SELECT * FROM product";
-    $stmt =  $conn->prepare($query);
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $stmt->execute();
-    $products =  $stmt->fetchAll();
+    // lấy trang đầu tiên 
     $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $itemsPerPage = 1; // Số sản phẩm trên mỗi trang
+    $itemsPerPage = 4; // Số sản phẩm trên mỗi trang
 
     // Tính toán vị trí bắt đầu của sản phẩm trong cơ sở dữ liệu
     $startFrom = ($currentPage - 1) * $itemsPerPage;
@@ -24,11 +20,13 @@ try {
     $totalItems = $stmt->fetch()['total'];
 
     // Lấy danh sách sản phẩm theo trang
-    $stmt = $conn->prepare("SELECT * FROM product LIMIT :startFrom, :itemsPerPage");
-    $stmt->bindValue(':startFrom', $startFrom, PDO::PARAM_INT);
-    $stmt->bindValue(':itemsPerPage', $itemsPerPage, PDO::PARAM_INT);
+    $query = "SELECT * FROM product LIMIT :startFrom, :itemsPerPage";
+    $stmt = $conn->prepare($query);
+    $stmt->bindValue(":startFrom", $startFrom , PDO::PARAM_INT);
+    $stmt->bindValue(":itemsPerPage",$itemsPerPage , PDO::PARAM_INT);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $stmt->execute();
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $products = $stmt->fetchAll();
 
     // Tính toán số trang
     $totalPages = ceil($totalItems / $itemsPerPage);
@@ -47,6 +45,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
@@ -87,10 +86,28 @@ try {
         .descript {
             width: 400px;
         }
+        .btn.btn-outline-dark{
+            margin: 0 5px;
+        }
+        /* .btnChiaTrang:hover{
+
+        } */
+        .wap__btnChiaTrang{
+            margin: 20px auto;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .viewIndex{
+            border: none;
+            margin: 20px 10px;
+        }
     </style>
 </head>
 
 <body>
+    <button class="viewIndex btn btn-outline-secondary"><i class="fa-solid fa-arrow-left"></i> trang chủ </button>
     <table class="table">
         <thead>
             <tr>
@@ -117,9 +134,12 @@ try {
             <?php endforeach; ?>
         </tbody>
     </table>
-   <?php  for ($i = 1; $i <= $totalPages; $i++) {
-        echo "<a href='?page={$i}'>{$i}</a> ";
-    } ?>
+    <div class="wap__btnChiaTrang">
+          <?php  for ($i = 1; $i <= $totalPages; $i++) {
+        echo "<a href='?page={$i}' class=\"btn btn-outline-dark\">{$i}</a> ";
+    } ?> 
+    </div>
+
     <button class="btnAddproduct btn  btn-primary">Thêm sản phẩm</button>
     <form action="../model/upload.php" method="POST" class="formUpload toast " enctype="multipart/form-data" id="formadd">
         <div class="toast-header mb-3">
@@ -163,6 +183,9 @@ try {
     btnadd.addEventListener("click", function(e) {
         form.classList.add("show");
     })
+    document.querySelector(".viewIndex").addEventListener("click", function(e) {
+        window.location.href="../index1.php";
+    });
 </script>
 
 </html>
