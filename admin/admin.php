@@ -1,40 +1,17 @@
 <?php
+require_once "../model/action.php";
 $err = $maProduct =   "";
 if (isset($_GET['error'])) {
     $err = $_GET['error'];
     $maProduct = $_GET['maProduct'];
 }
-try {
-    $conn = new PDO("mysql:host=localhost;dbname=mydatabase", "root", "");
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // lấy trang đầu tiên 
-    $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $itemsPerPage = 4; // Số sản phẩm trên mỗi trang
-
-    // Tính toán vị trí bắt đầu của sản phẩm trong cơ sở dữ liệu
-    $startFrom = ($currentPage - 1) * $itemsPerPage;
-
-    // Lấy tổng số sản phẩm
-    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM product");
-    $stmt->execute();
-    $totalItems = $stmt->fetch()['total'];
-
-    // Lấy danh sách sản phẩm theo trang
-    $query = "SELECT * FROM product LIMIT :startFrom, :itemsPerPage";
-    $stmt = $conn->prepare($query);
-    $stmt->bindValue(":startFrom", $startFrom , PDO::PARAM_INT);
-    $stmt->bindValue(":itemsPerPage",$itemsPerPage , PDO::PARAM_INT);
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $stmt->execute();
-    $products = $stmt->fetchAll();
-
-    // Tính toán số trang
-    $totalPages = ceil($totalItems / $itemsPerPage);
-
-    // Hiển thị danh sách sản phẩm
-
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+$conn = connect();
+tinhtrang($conn);
+$tinhtrang = tinhtrang($conn);
+if(isset($_GET['maProduct'])){
+    $maXoa = $_GET['maProduct'];
+    $conn = connect();
+    deleteProduct($conn , $maXoa);
 }
 ?>
 
@@ -45,8 +22,8 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         img {
@@ -86,20 +63,23 @@ try {
         .descript {
             width: 400px;
         }
-        .btn.btn-outline-dark{
+
+        .btn.btn-outline-dark {
             margin: 0 5px;
         }
+
         /* .btnChiaTrang:hover{
 
         } */
-        .wap__btnChiaTrang{
+        .wap__btnChiaTrang {
             margin: 20px auto;
             width: fit-content;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .viewIndex{
+
+        .viewIndex {
             border: none;
             margin: 20px 10px;
         }
@@ -121,7 +101,7 @@ try {
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($products as $product) : ?>
+            <?php foreach ($tinhtrang["product"] as $product) : ?>
                 <tr>
                     <td><?php echo $product['maProduct'] ?></td>
                     <td><img src="../img/<?php echo $product['imgProduct'] ?>" alt=""></td>
@@ -129,15 +109,15 @@ try {
                     <td><?php echo $product['priceNew'] ?></td>
                     <td><?php echo $product['priceOld'] ?></td>
                     <td class="descript"><?php echo $product['descript'] ?></td>
-                    <td><button class="btn btn-outline-primary">thêm</button></td>
+                    <td><button class="btn btn-outline-danger btn--delete">Xóa</button></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
     <div class="wap__btnChiaTrang">
-          <?php  for ($i = 1; $i <= $totalPages; $i++) {
-        echo "<a href='?page={$i}' class=\"btn btn-outline-dark\">{$i}</a> ";
-    } ?> 
+        <?php for ($i = 1; $i <= $tinhtrang["totalPages"]; $i++) {
+            echo "<a href='?page={$i}' class=\"btn btn-outline-dark\">{$i}</a> ";
+        } ?>
     </div>
 
     <button class="btnAddproduct btn  btn-primary">Thêm sản phẩm</button>
@@ -183,9 +163,28 @@ try {
     btnadd.addEventListener("click", function(e) {
         form.classList.add("show");
     })
+
+    function filterData(data) {
+        data = data.trim();
+        data = Number(data);
+        return data;
+    }
     document.querySelector(".viewIndex").addEventListener("click", function(e) {
-        window.location.href="../index1.php";
+        window.location.href = "../index1.php";
     });
+    // xử lý delete
+    var btnDeletes = document.querySelectorAll(".btn--delete");
+    btnDeletes.forEach(function(btnDelete) {
+        btnDelete.addEventListener("click", function(e) {
+            var trElement = btnDelete.closest("tr");
+            const tdElements = trElement.querySelectorAll("td");
+            // Ajax
+            const maProductValue = filterData(tdElements[0].innerText);
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "?maProduct="+maProductValue);
+            xhttp.send();
+        });
+    })
 </script>
 
 </html>

@@ -1,41 +1,14 @@
 <?php
+require_once "./model/action.php";
 $err = $maProduct =   "";
 if (isset($_GET['error'])) {
     $err = $_GET['error'];
     $maProduct = $_GET['maProduct'];
 }
-try {
-    $conn = new PDO("mysql:host=localhost;dbname=mydatabase", "root", "");
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // lấy trang đầu tiên 
-    $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $itemsPerPage = 4; // Số sản phẩm trên mỗi trang
-
-    // Tính toán vị trí bắt đầu của sản phẩm trong cơ sở dữ liệu
-    $startFrom = ($currentPage - 1) * $itemsPerPage;
-
-    // Lấy tổng số sản phẩm
-    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM product");
-    $stmt->execute();
-    $totalItems = $stmt->fetch()['total'];
-
-    // Lấy danh sách sản phẩm theo trang
-    $query = "SELECT * FROM product LIMIT :startFrom, :itemsPerPage";
-    $stmt = $conn->prepare($query);
-    $stmt->bindValue(":startFrom", $startFrom, PDO::PARAM_INT);
-    $stmt->bindValue(":itemsPerPage", $itemsPerPage, PDO::PARAM_INT);
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $stmt->execute();
-    $products = $stmt->fetchAll();
-
-    // Tính toán số trang
-    $totalPages = ceil($totalItems / $itemsPerPage);
-
-    // Hiển thị danh sách sản phẩm
-
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
+connect();
+$conn = connect();
+tinhtrang($conn);
+$tinhtrang = tinhtrang($conn);
 ?>
 
 <!DOCTYPE html>
@@ -157,7 +130,7 @@ try {
         <div class="content">
             <h1 class="content__heading">Khuyến mãi tháng 8</h1>
             <div class="product">
-                <?php foreach ($products as  $product) : ?>
+                <?php foreach ($tinhtrang["product"] as  $product) : ?>
                     <section class="product__item">
                         <img src="./img/<?php echo $product['imgProduct'] ?>" alt="" class="product__img">
                         <span class="product__title"><?php echo $product['nameProduct'] ?></span>
@@ -166,11 +139,12 @@ try {
                             <span class="product__price--old"><?php echo $product['priceOld'] ?>đ</span>
                         </div>
                         <button class="product--btn">Mua Ngay</button>
+                        <div class="product__descript"><?php echo $product['descript'] ?></div>
                     </section>
                 <?php endforeach; ?>
             </div>
             <div class="wap__btnChiaTrang">
-                <?php for ($i = 1; $i <= $totalPages; $i++) {
+                <?php for ($i = 1; $i <= $tinhtrang["totalPages"]; $i++) {
                     echo "<a href='?page={$i}' class=\"btn btn-outline-dark btn-ms\">{$i}</a> ";
                 } ?>
             </div>

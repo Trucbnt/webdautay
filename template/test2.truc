@@ -1,1 +1,3 @@
- <h1>{{data2}}</h1>
+{% if{{data}} > 18 %}
+    <spam> Ban lon hon 18 tuoi </span>
+{% endif %}

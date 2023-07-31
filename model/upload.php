@@ -1,4 +1,5 @@
 <?php
+require_once "action.php";
 $target_dir = "../img/";
 $target_file = $target_dir . basename($_FILES["fieldImg"]["name"]);
 $uploadOk = 1;
@@ -51,34 +52,16 @@ if ($uploadOk == 0) {
             $priceOld = $_POST["priceOld"];
             $descript = $_POST["descript"];
             $imgProduct = $_FILES["fieldImg"]["name"];
-            try {
-                $conn = new PDO("mysql:host=localhost;dbname=mydatabase", "root", "");
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $queryGet = "SELECT * FROM product WHERE maProduct = :maProduct";
-                $stmt0 = $conn->prepare($queryGet);
-                $stmt0->bindParam(":maProduct" , $maProduct);
-                $stmt0->setFetchMode(PDO::FETCH_ASSOC);
-                $stmt0->execute();
-                $result = $stmt0->fetch();
-                if($result){
-                    header("Location: ../admin/admin.php?error=mã sản phẩm đã tồn tại&maProduct=".$maProduct);
-                    exit();
-                }else{
-                    $queryadd = "INSERT INTO product(maProduct,nameProduct,imgProduct,priceNew,priceOld,descript)
-                     VALUES(:maProduct , :nameProduct , :imgProduct ,:priceNew , :priceOld , :descript);";
-                    $stmt = $conn->prepare($queryadd);
-                    $stmt->bindParam(":maProduct", $maProduct);
-                    $stmt->bindParam(":nameProduct", $nameProduct);
-                    $stmt->bindParam(":imgProduct", $imgProduct);
-                    $stmt->bindParam(":priceNew", $priceNew);
-                    $stmt->bindParam(":priceOld", $priceOld);
-                    $stmt->bindParam(":descript", $descript);
-                    $stmt->execute();
-                    header("Location: ../admin/admin.php");
-                    exit();
-                }
-            } catch (PDOException $e) {
-                echo "Error: " . $e->getMessage();
+            connect();
+            $conn = connect();
+            $result = getDuplicateRecords($conn , $maProduct);
+            if($result){
+                header("Location: ../admin/admin.php?error=mã sản phẩm đã tồn tại&maProduct=".$maProduct);
+                exit();
+            }else{
+                addProduct($conn , $maProduct , $nameProduct ,  $imgProduct, $priceNew, $priceOld, $descript);
+                header("Location: ../admin/admin.php");
+                exit();
             }
         }
     } else {
