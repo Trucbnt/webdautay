@@ -22,7 +22,7 @@ if(isset($_GET['messErr'])){
 
 <body>
     <form class="form_main" action="../model/processSignup.php" id="formSignup" method="POST">
-        <p class="heading">Login</p>
+        <p class="heading">Register</p>
         <div class="form__group <?php echo $cls ?>">
             <div class="wrap__input-icon">
                 <i class="fa-solid fa-user form__icon"></i>

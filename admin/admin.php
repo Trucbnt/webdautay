@@ -8,11 +8,60 @@ if (isset($_GET['error'])) {
 $conn = connect();
 tinhtrang($conn);
 $tinhtrang = tinhtrang($conn);
-if(isset($_GET['maProduct'])){
-    $maXoa = $_GET['maProduct'];
+if (isset($_GET['deleteProduct']) && isset($_GET['imgPath'])) {
+    $maXoa = $_GET['deleteProduct'];
+    $imgName = $_GET['imgPath'];
     $conn = connect();
-    deleteProduct($conn , $maXoa);
+    deleteImage($imgName);
+    deleteProduct($conn, $maXoa);
 }
+if(isset($_GET['editProduct'])){
+    editProduct($_GET['editProduct']);
+
+}
+$maProduct =$imgProduct=$priceNew = $peiceOld = $descript = $nameProduct ="";
+if (isset($_POST['btnEditSubmit'])) {
+    $maProduct = $_POST["maProduct"];
+    $nameProduct = $_POST["nameProduct"];
+    $imgProduct = $_FILES["fieldImg"]["name"];
+    $priceNew = $_POST["priceNew"];
+    $priceOld = $_POST["priceOld"];
+    $descript = $_POST["descript"];
+    $maProductCurrent = $_GET["maProductCurrent"];
+
+    try {
+        // Sử dụng Prepared Statements để tránh SQL Injection
+        $queryUpdate = "UPDATE product 
+                        SET 
+                        maProduct = :maProduct,
+                        nameProduct = :nameProduct,
+                        imgProduct = :imgProduct,
+                        priceNew = :priceNew,
+                        priceOld = :priceOld,
+                        descript = :descript
+                        WHERE maProduct = :maProductCurrent";
+        
+        $stmt = $conn->prepare($queryUpdate);
+        $stmt->bindParam(':maProduct', $maProduct);
+        $stmt->bindParam(':nameProduct', $nameProduct);
+        $stmt->bindParam(':imgProduct', $imgProduct);
+        $stmt->bindParam(':priceNew', $priceNew);
+        $stmt->bindParam(':priceOld', $priceOld);
+        $stmt->bindParam(':descript', $descript);
+        $stmt->bindParam(':maProductCurrent', $maProductCurrent);
+
+        if ($stmt->execute()) {
+            echo "Update successful.";
+            header("Location: ".$_SERVER["PHP_SELF"]);
+            exit();
+        } else {
+            echo "Update failed.";
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +134,6 @@ if(isset($_GET['maProduct'])){
         }
     </style>
 </head>
-
 <body>
     <button class="viewIndex btn btn-outline-secondary"><i class="fa-solid fa-arrow-left"></i> trang chủ </button>
     <table class="table">
@@ -109,7 +157,10 @@ if(isset($_GET['maProduct'])){
                     <td><?php echo $product['priceNew'] ?></td>
                     <td><?php echo $product['priceOld'] ?></td>
                     <td class="descript"><?php echo $product['descript'] ?></td>
-                    <td><button class="btn btn-outline-danger btn--delete">Xóa</button></td>
+                    <td>
+                        <a href="?deleteProduct=<?php echo ($product['maProduct']."&imgPath=".$product['imgProduct']) ?>" class="btn btn-outline-danger">Xóa</a>
+                        <a href="?editProduct=<?php echo $product['maProduct'] ?>" class="btn btn-outline-info btn--edit">Edit</a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -163,28 +214,9 @@ if(isset($_GET['maProduct'])){
     btnadd.addEventListener("click", function(e) {
         form.classList.add("show");
     })
-
-    function filterData(data) {
-        data = data.trim();
-        data = Number(data);
-        return data;
-    }
     document.querySelector(".viewIndex").addEventListener("click", function(e) {
         window.location.href = "../index1.php";
     });
-    // xử lý delete
-    var btnDeletes = document.querySelectorAll(".btn--delete");
-    btnDeletes.forEach(function(btnDelete) {
-        btnDelete.addEventListener("click", function(e) {
-            var trElement = btnDelete.closest("tr");
-            const tdElements = trElement.querySelectorAll("td");
-            // Ajax
-            const maProductValue = filterData(tdElements[0].innerText);
-            const xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "?maProduct="+maProductValue);
-            xhttp.send();
-        });
-    })
 </script>
 
 </html>

@@ -1,14 +1,6 @@
 
 *{
-    /* chỗ này là set cho tất cả các thẻ có thuộc tinh box-sizing: inherit;
-    dong nay nghia la nó kế thừa thuộc tính box-sizing
-    */
     box-sizing: inherit;
-    /* set tất cả các thẻ     
-    margin: 0;
-    padding: 0;
-    vì có 1 số thẻ mặc định nó đã tự có padding or mg rồi : ví dụ với tag Ul li
-     */
     margin: 0;
     padding: 0;
 }
@@ -46,6 +38,7 @@ html{
     display: flex;
     align-items: center;
     list-style: none;
+    margin: 0;
 }
 .navbar__list>li{
     border-right:1px solid #fff ;
