@@ -1,4 +1,7 @@
 <?php
+if (!isset($_COOKIE["admin"])) {
+    header("Location: ../view/login.php");
+}
 require_once "../model/action.php";
 $err = $maProduct =   "";
 if (isset($_GET['error'])) {
@@ -15,11 +18,10 @@ if (isset($_GET['deleteProduct']) && isset($_GET['imgPath'])) {
     deleteImage($imgName);
     deleteProduct($conn, $maXoa);
 }
-if(isset($_GET['editProduct'])){
+if (isset($_GET['editProduct'])) {
     editProduct($_GET['editProduct']);
-
 }
-$maProduct =$imgProduct=$priceNew = $peiceOld = $descript = $nameProduct ="";
+$maProduct = $imgProduct = $priceNew = $peiceOld = $descript = $nameProduct = "";
 if (isset($_POST['btnEditSubmit'])) {
     $maProduct = $_POST["maProduct"];
     $nameProduct = $_POST["nameProduct"];
@@ -40,7 +42,7 @@ if (isset($_POST['btnEditSubmit'])) {
                         priceOld = :priceOld,
                         descript = :descript
                         WHERE maProduct = :maProductCurrent";
-        
+
         $stmt = $conn->prepare($queryUpdate);
         $stmt->bindParam(':maProduct', $maProduct);
         $stmt->bindParam(':nameProduct', $nameProduct);
@@ -52,7 +54,7 @@ if (isset($_POST['btnEditSubmit'])) {
 
         if ($stmt->execute()) {
             echo "Update successful.";
-            header("Location: ".$_SERVER["PHP_SELF"]);
+            header("Location: " . $_SERVER["PHP_SELF"]);
             exit();
         } else {
             echo "Update failed.";
@@ -134,6 +136,7 @@ if (isset($_POST['btnEditSubmit'])) {
         }
     </style>
 </head>
+
 <body>
     <button class="viewIndex btn btn-outline-secondary"><i class="fa-solid fa-arrow-left"></i> trang chủ </button>
     <table class="table">
@@ -158,7 +161,7 @@ if (isset($_POST['btnEditSubmit'])) {
                     <td><?php echo $product['priceOld'] ?></td>
                     <td class="descript"><?php echo $product['descript'] ?></td>
                     <td>
-                        <a href="?deleteProduct=<?php echo ($product['maProduct']."&imgPath=".$product['imgProduct']) ?>" class="btn btn-outline-danger">Xóa</a>
+                        <a href="?deleteProduct=<?php echo ($product['maProduct'] . "&imgPath=" . $product['imgProduct']) ?>" class="btn btn-outline-danger">Xóa</a>
                         <a href="?editProduct=<?php echo $product['maProduct'] ?>" class="btn btn-outline-info btn--edit">Edit</a>
                     </td>
                 </tr>
@@ -217,6 +220,20 @@ if (isset($_POST['btnEditSubmit'])) {
     document.querySelector(".viewIndex").addEventListener("click", function(e) {
         window.location.href = "../index1.php";
     });
+
+    function getCookie(name) {
+        var cookie = ";" + document.cookie;
+        var parts = cookie.split(";" + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+    var loginSuccess = Number(getCookie("admin"));
+    console.log(loginSuccess);
+    if (loginSuccess) {
+        setTimeout(function() {
+            location.reload();
+            console.log("rund");
+        }, loginSuccess * 1000); // 10000 milliseconds = 10 seconds
+    }
 </script>
 
 </html>

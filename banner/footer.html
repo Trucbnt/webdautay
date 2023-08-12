@@ -5,20 +5,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.2.1-web/fontawesome-free-6.2.1-web/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        footer {
-            background-color: black;
+        footer{
+            background: url(img/backgroud.jpg);
+            padding-top: 30px;
             color: #fff;
+        }
+        .footer__logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer__logo--icon {
+            font-size: 30px;
+            margin-right: 10px;
+        }
+
+        .footer__logo--wrap {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer__logo--text {
+            font-size: 14px;
+            color: #c19960;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-style: italic;
+        }
+
+        .footer__logo--text2 {
+            font-size: 1.2rem;
+            font-style: italic;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .footer__content {
+            width:35% ;
+            margin: 10px auto;
             text-align: center;
-            height: 50px;
-            line-height: 50px;
-            font-size: 1.4rem;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .footer__content--about{
+            font-size: 1.4rem
+        }
+        .footer__content--address{
+            font-size: 12px;
+            color: #c19960;
+        }
+        .fa-brands{
+            margin: 15px ;
+            font-size: 25px;
+        }
+        .footer__separation{
+            height: 1px;
+            background: #a3a3a3;
+        }
+        .footer__navbar{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+
+        }
+        .footer__navbar--list{
+            margin: 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        .footer__navbar--item{
+            margin: 0 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .footer__coppy{
+            font-size: 12px;
+            margin-right: 40px;
+            font-family: Arial, Helvetica, sans-serif;
         }
     </style>
 </head>
 
 <body>
-    <footer>trucbntph33131@fpt.edu.vn</footer>
+    <footer>
+        <div class="footer__logo">
+            <i class="fa-solid fa-pizza-slice footer__logo--icon"></i>
+            <div class="footer__logo--wrap">
+                <span class="footer__logo--text">TCFOOD</span>
+                <span class="footer__logo--text2">restaurent</span>
+            </div>
+        </div>
+        <div class="footer__content">
+            <span class="footer__content--about">
+                Discover Culinary Delights: Indulge in our exquisite selection of mouthwatering dishes,
+                 crafted with passion and flair. Elevate your dining experience with us today.
+            </span> <br><br>
+            <span class="footer__content--address">
+                My Luong Commune - Yen Lap District - Phu Tho Province
+            </span>
+            <br> <br>
+            <span class="footer__content--address">
+                <i class="fa-regular fa-envelope"></i> suppportTCfood@gmail.com
+            </span>
+            <br> <br>
+            <span class="footer__content--address">
+                <i class="fa-solid fa-phone"></i> 03-4499-2708
+            </span>
+            <div class="wap__icon">
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-tiktok"></i>
+            </div>
+        </div>
+        <div class="footer__separation"></div>
+        <nav class="footer__navbar">
+            <ul class="footer__navbar--list">
+                <li class="footer__navbar--item">Home</li>
+                <li class="footer__navbar--item">Privacy Policy</li>
+                <li class="footer__navbar--item">Site map</li>
+                <li class="footer__navbar--item">Contact</li>
+            </ul>
+            <span class="footer__coppy">
+                @trucbntdev All Right Reserved
+            </span>
+        </nav>
+    </footer>
 </body>
 
 </html>

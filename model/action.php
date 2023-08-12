@@ -14,7 +14,7 @@ function connect(){
 // chia trang 
 function tinhtrang($conn){
     $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $itemsPerPage = 4; // Số sản phẩm trên mỗi trang
+    $itemsPerPage = 5; // Số sản phẩm trên mỗi trang
 
     // Tính toán vị trí bắt đầu của sản phẩm trong cơ sở dữ liệu
     $startFrom = ($currentPage - 1) * $itemsPerPage;

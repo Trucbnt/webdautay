@@ -43,90 +43,97 @@ $tinhtrang = tinhtrang($conn);
 
 <body>
     <div class="app">
-        <nav class="navbar">
-            <ul class="navbar__list">
-                <li><a href="" class="navbar__item">Trang chủ</a></li>
-                <li><a href="" class="navbar__item">Bánh mì</a></li>
-                <li><a href="" class="navbar__item">Nước uống</a></li>
-                <li><a href="" class="navbar__item">Khuyến mãi</a></li>
-                <li><a href="" class="navbar__item">Liên hệ</a></li>
-            </ul>
-            <div class="navbar__account">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <div class="navbar__account-user">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6v-Quj0rUbKfkYkO5xry7QsyV_3dNemjlbw&usqp=CAU" alt="" class="navbar__account-user--img">
-                    <span class="navbar__account-user--name">Bùi Ngọc Trúc</span>
-                </div>
-                <div class="header__cart-list ">
-                    <h4 class="header__cart-heading">Sản Phẩm Đã Thêm</h4>
-                    <ul class="header__cart-list-item">
-                        <li class="header__cart-item">
-                            <img src="img/sp1.png" alt="" class="header__cart-item-img">
-                            <div class="header__cart-item-info">
-                                <div class="header__cart-item-head">
-                                    <h5 class="header__cart-item-name"> Bánh mì pate giò đặc biệt </h5>
-                                    <div class="header__cart-price-wrap">
-                                        <span class="header__cart-item-price">25.000đ</span>
-                                        <span class="header__cart-item-multiply">x</span>
-                                        <span class="header__cart-item-quantity">1</span>
+        <div class="header">
+            <nav class="navbar">
+                <ul class="navbar__list">
+                    <li><a href="" class="navbar__item">Trang chủ</a></li>
+                    <li><a href="" class="navbar__item">Bánh mì</a></li>
+                    <li><a href="" class="navbar__item">Nước uống</a></li>
+                    <li><a href="" class="navbar__item">Khuyến mãi</a></li>
+                    <li><a href="" class="navbar__item">Liên hệ</a></li>
+                </ul>
+                <div class="navbar__account">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <div class="navbar__account-user">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6v-Quj0rUbKfkYkO5xry7QsyV_3dNemjlbw&usqp=CAU" alt="" class="navbar__account-user--img">
+                        <span class="navbar__account-user--name">Bùi Ngọc Trúc</span>
+                        <div class="navbar__account--wrap">
+                            <ul class="navbar__account--list">
+                                <li><a href="" class="navbar__account--item">Thông tin tài khoản</a></li>
+                                <li><a href="" class="navbar__account--item">Đơn hàng</a></li>
+                                <li><a href="index.php" class="navbar__account--item">Đăng xuất</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="header__cart-list ">
+                        <h4 class="header__cart-heading">Sản Phẩm Đã Thêm</h4>
+                        <ul class="header__cart-list-item">
+                            <li class="header__cart-item">
+                                <img src="img/sp1.png" alt="" class="header__cart-item-img">
+                                <div class="header__cart-item-info">
+                                    <div class="header__cart-item-head">
+                                        <h5 class="header__cart-item-name"> Bánh mì pate giò đặc biệt </h5>
+                                        <div class="header__cart-price-wrap">
+                                            <span class="header__cart-item-price">25.000đ</span>
+                                            <span class="header__cart-item-multiply">x</span>
+                                            <span class="header__cart-item-quantity">1</span>
+                                        </div>
+                                    </div>
+                                    <div class="header__cart-item-body">
+                                        <span class="header__cart-description"> Phân loại : Bạc</span>
+                                        <span class="header__cart-delete"> Xóa</span>
                                     </div>
                                 </div>
-                                <div class="header__cart-item-body">
-                                    <span class="header__cart-description"> Phân loại : Bạc</span>
-                                    <span class="header__cart-delete"> Xóa</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="header__cart-item">
-                            <img src="img/sp2.png" alt="" class="header__cart-item-img">
-                            <div class="header__cart-item-info">
-                                <div class="header__cart-item-head">
-                                    <h5 class="header__cart-item-name"> Bánh mì bò hũ tiếu </h5>
-                                    <div class="header__cart-price-wrap">
-                                        <span class="header__cart-item-price">25.000đ</span>
-                                        <span class="header__cart-item-multiply">x</span>
-                                        <span class="header__cart-item-quantity">1</span>
+                            </li>
+                            <li class="header__cart-item">
+                                <img src="img/sp2.png" alt="" class="header__cart-item-img">
+                                <div class="header__cart-item-info">
+                                    <div class="header__cart-item-head">
+                                        <h5 class="header__cart-item-name"> Bánh mì bò hũ tiếu </h5>
+                                        <div class="header__cart-price-wrap">
+                                            <span class="header__cart-item-price">25.000đ</span>
+                                            <span class="header__cart-item-multiply">x</span>
+                                            <span class="header__cart-item-quantity">1</span>
+                                        </div>
+                                    </div>
+                                    <div class="header__cart-item-body">
+                                        <span class="header__cart-description"> Phân loại : vàng </span>
+                                        <span class="header__cart-delete"> Xóa</span>
                                     </div>
                                 </div>
-                                <div class="header__cart-item-body">
-                                    <span class="header__cart-description"> Phân loại : vàng </span>
-                                    <span class="header__cart-delete"> Xóa</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="header__cart-item">
-                            <img src="img/sp3.png" alt="" class="header__cart-item-img">
-                            <div class="header__cart-item-info">
-                                <div class="header__cart-item-head">
-                                    <h5 class="header__cart-item-name"> Bánh mì pate giò đặc biệt </h5>
-                                    <div class="header__cart-price-wrap">
-                                        <span class="header__cart-item-price">25.000đ</span>
-                                        <span class="header__cart-item-multiply">x</span>
-                                        <span class="header__cart-item-quantity">1</span>
+                            </li>
+                            <li class="header__cart-item">
+                                <img src="img/sp3.png" alt="" class="header__cart-item-img">
+                                <div class="header__cart-item-info">
+                                    <div class="header__cart-item-head">
+                                        <h5 class="header__cart-item-name"> Bánh mì pate giò đặc biệt </h5>
+                                        <div class="header__cart-price-wrap">
+                                            <span class="header__cart-item-price">25.000đ</span>
+                                            <span class="header__cart-item-multiply">x</span>
+                                            <span class="header__cart-item-quantity">1</span>
+                                        </div>
+                                    </div>
+                                    <div class="header__cart-item-body">
+                                        <span class="header__cart-description"> Phân loại : Bạc</span>
+                                        <span class="header__cart-delete"> Xóa</span>
                                     </div>
                                 </div>
-                                <div class="header__cart-item-body">
-                                    <span class="header__cart-description"> Phân loại : Bạc</span>
-                                    <span class="header__cart-delete"> Xóa</span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <a class="header__cart-view-btn btn btn--primary">Xem giỏ hàng</a>
+                            </li>
+                        </ul>
+                        <a class="header__cart-view-btn btn btn--primary">Xem giỏ hàng</a>
+                    </div>
                 </div>
-                <div class="navbar__account--wrap">
-                    <ul class="navbar__account--list">
-                        <li><a href="" class="navbar__account--item">Thông tin tài khoản</a></li>
-                        <li><a href="" class="navbar__account--item">Đơn hàng</a></li>
-                        <li><a href="index.php" class="navbar__account--item">Đăng xuất</a></li>
-                    </ul>
-                </div>
+            </nav>
+            <div class="search">
+                <form action="" class="search__form">
+                    <input type="text" class="search__input" placeholder="  Tìm kiếm sản phẩm">
+                    <button name="" class="search__btn"><i class="fa-solid fa-magnifying-glass search--icon"></i></button>
+                </form>
             </div>
-        </nav>
-        <canvas id="canvas" width="226" height="86" style="display: block; margin: 15px auto; "></canvas>
-        <header class="header">
-            <img src="img/banner.png" alt="" class="banner">
-        </header>
+        </div>
+
+        <canvas id="canvas" width="226" height="86" style="display: block; margin: 100px auto 15px auto; "></canvas>
+            <img src="img/banner1.png" alt="" class="banner" id="banner">
         <div class="content">
             <h1 class="content__heading">Khuyến mãi tháng 8</h1>
             <div class="product">
@@ -180,5 +187,16 @@ $tinhtrang = tinhtrang($conn);
     content.closePath();
 </script>
 <script src="js/main.js"></script>
+<script>
+    var banner = document.getElementById("banner");
+    var index = 1;
+    setInterval(function() {
+        if (index > 3) {
+            index = 1;
+        }
+        banner.src = `img/banner${index}.png`;
+        index++;
+    }, 2000);
+</script>
 
 </html>

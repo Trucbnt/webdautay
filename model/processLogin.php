@@ -4,6 +4,7 @@
         $account = $_POST["account"];
         $pass = $_POST["password"];
         if($account =="admin" && $pass=="123456"){
+            setcookie("admin","200",time()+200 , "/");
             header("Location: ../admin/admin.php");
             exit();
         }
